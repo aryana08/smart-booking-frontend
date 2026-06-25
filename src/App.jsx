@@ -28,14 +28,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/')
+    fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/api/services')
       .then(res => res.json())
       .then(data => { if(data.success) setServices(data.data); })
       .catch(() => toast.error("Gagal narik layanan dari server"));
   }, []);
 
   const fetchBookings = () => {
-    fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/')
+    fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/api/services')
       .then(res => res.json())
       .then(data => { if(data.success) setBookings(data.data); })
       .catch(() => toast.error("Gagal narik data booking"));
@@ -54,7 +54,7 @@ function App() {
     const loadingToast = toast.loading("Mengecek kredensial...");
     
     try {
-      const response = await fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/', {
+      const response = await fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/api/services', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginData)
@@ -94,7 +94,7 @@ function App() {
     const loadingToast = toast.loading("Menyiapkan pembayaran...");
 
     try {
-      const response = await fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/', {
+      const response = await fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/api/services', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
