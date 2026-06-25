@@ -35,7 +35,7 @@ function App() {
   }, []);
 
   const fetchBookings = () => {
-    fetch('http://localhost:5000/api/bookings')
+    fetch('https://smart-booking-backend-ashen.vercel.app/api/bookings')
       .then(res => res.json())
       .then(data => { if(data.success) setBookings(data.data); })
       .catch(() => toast.error("Gagal narik data booking"));
