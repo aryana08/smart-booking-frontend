@@ -35,7 +35,7 @@ function App() {
   }, []);
 
   const fetchBookings = () => {
-    fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/api/services')
+    fetch('http://localhost:5000/api/bookings')
       .then(res => res.json())
       .then(data => { if(data.success) setBookings(data.data); })
       .catch(() => toast.error("Gagal narik data booking"));
@@ -54,7 +54,7 @@ function App() {
     const loadingToast = toast.loading("Mengecek kredensial...");
     
     try {
-      const response = await fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/api/services', {
+      const response = await fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginData)
@@ -94,7 +94,7 @@ function App() {
     const loadingToast = toast.loading("Menyiapkan pembayaran...");
 
     try {
-      const response = await fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/api/services', {
+      const response = await fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -134,7 +134,7 @@ function App() {
   const handleUpdateStatus = async (id, newStatus) => {
     const loadingToast = toast.loading("Memperbarui status...");
     try {
-      const response = await fetch(`https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app//${id}`, {
+      const response = await fetch(`https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/api/bookings/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })
