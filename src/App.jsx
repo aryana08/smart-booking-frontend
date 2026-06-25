@@ -54,7 +54,7 @@ function App() {
     const loadingToast = toast.loading("Mengecek kredensial...");
     
     try {
-      const response = await fetch('http://localhost:5000/api/admin/login', {
+      const response = await fetch('https://smart-booking-backend-9it4jfznf-dimas-projects001.vercel.app/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginData)
