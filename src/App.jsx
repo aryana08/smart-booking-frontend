@@ -236,7 +236,7 @@ function App() {
 
             <button type="submit" disabled={isLoading} 
               className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-3.5 px-4 rounded-xl hover:from-blue-700 hover:to-indigo-700 shadow-xl shadow-blue-500/30 hover:shadow-blue-600/40 transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all mt-6 disabled:opacity-70 disabled:cursor-not-allowed">
-              {isLoading ? '⏳ Memproses Token...' : 'Booking & Bayar Sekarang 💳'}
+              {isLoading ? '⏳ Memproses Token...' : 'Booking Sekarang ✏️'}
             </button>
           </form>
         </div>
