@@ -161,7 +161,7 @@ function App() {
       {/* Navigasi Utama */}
       <div className="w-full max-w-5xl flex justify-between items-center mb-10 bg-white/60 backdrop-blur-md p-4 rounded-2xl shadow-sm border border-gray-100">
         <div className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 tracking-wider">
-          ⚡ SMARTBOOK
+          ⚡ CHARMING CHIC MAKEUP
         </div>
         <div className="flex gap-3">
           <button onClick={() => setView('user')} 
@@ -180,7 +180,7 @@ function App() {
         <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl shadow-blue-900/5 p-8 border border-white relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
           <h1 className="text-3xl font-extrabold text-center text-gray-800 mb-2">Reservasi Baru</h1>
-          <p className="text-center text-gray-500 mb-8 text-sm font-medium">Isi form di bawah untuk mengamankan slot kamu!</p>
+          <p className="text-center text-gray-500 mb-8 text-sm font-medium">Isi form di bawah untuk mengamankan jadwal kamu!</p>
           
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="relative">
@@ -279,7 +279,7 @@ function App() {
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 border-b border-gray-100 pb-6 gap-4">
                 <div>
                   <h1 className="text-3xl font-extrabold text-gray-800 tracking-tight">Dashboard Admin</h1>
-                  <p className="text-sm text-gray-500 mt-1 font-medium">Monitoring reservasi dan status pembayaran</p>
+                  <p className="text-sm text-gray-500 mt-1 font-medium">Monitoring Jadwal Makeup & Status Pembayaran</p>
                 </div>
                 <button onClick={handleLogout} className="flex items-center gap-2 bg-red-50 text-red-600 hover:bg-red-500 hover:text-white font-bold py-2.5 px-5 rounded-xl transition-all duration-300 border border-red-100 hover:shadow-lg hover:shadow-red-500/20 active:scale-95">
                   <FaSignOutAlt /> Logout
@@ -292,8 +292,8 @@ function App() {
                     <tr className="bg-gray-50 text-gray-500 uppercase text-xs font-bold tracking-wider border-b border-gray-200">
                       <th className="p-5">Data Pelanggan</th>
                       <th className="p-5">Layanan</th>
-                      <th className="p-5">Jadwal Main</th>
-                      <th className="p-5 text-center">Status Transaksi</th>
+                      <th className="p-5">Jadwal Makeup</th>
+                      <th className="p-5 text-center">Status Order</th>
                       <th className="p-5 text-center">Tindakan</th>
                     </tr>
                   </thead>
