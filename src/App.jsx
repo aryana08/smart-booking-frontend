@@ -85,13 +85,13 @@ function App() {
     toast.success("Berhasil Logout 👋");
   };
 
-  // ==================== BOOKING LOGIC ====================
+  // ==================== BOOKING LOGIC (SUDAH DIRAPIHKAN) ====================
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const loadingToast = toast.loading("Menyiapkan pembayaran...");
+    const loadingToast = toast.loading("Mengirim data reservasi...");
 
     try {
       const response = await fetch('https://smart-booking-backend-ashen.vercel.app/api/bookings', {
@@ -103,25 +103,12 @@ function App() {
       
       toast.dismiss(loadingToast);
       
-      if (result.success && result.snap_token) {
-        window.snap.pay(result.snap_token, {
-          onSuccess: function(){
-            toast.success("🎉 Pembayaran Sukses! Jadwal diamankan.");
-            setFormData({ customer_name: '', customer_whatsapp: '', service_id: '', booking_date: '', start_time: '' });
-          },
-          onPending: function(){
-            toast.success("⏳ Lanjutkan pembayaran kamu ya!");
-            setFormData({ customer_name: '', customer_whatsapp: '', service_id: '', booking_date: '', start_time: '' });
-          },
-          onError: function(){
-            toast.error("❌ Waduh, pembayaran gagal. Coba lagi!");
-          },
-          onClose: function(){
-            toast.error('⚠️ Kamu menutup pop-up sebelum selesai.');
-          }
-        });
+      // Logika disederhanakan, langsung cek sukses atau tidak tanpa Midtrans
+      if (result.success) {
+        toast.success("🎉 Reservasi Berhasil! Silakan tunggu konfirmasi admin.");
+        setFormData({ customer_name: '', customer_whatsapp: '', service_id: '', booking_date: '', start_time: '' });
       } else {
-        toast.error(result.message);
+        toast.error(result.message || "Gagal mengirim reservasi.");
       }
     } catch (error) {
       toast.dismiss(loadingToast);
@@ -155,10 +142,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 p-6 flex flex-col items-center font-sans text-gray-800">
-      {/* Wadah untuk Toast Notifications */}
       <Toaster position="top-center" reverseOrder={false} />
 
-      {/* Navigasi Utama */}
       <div className="w-full max-w-5xl flex justify-between items-center mb-10 bg-white/60 backdrop-blur-md p-4 rounded-2xl shadow-sm border border-gray-100">
         <div className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 tracking-wider">
           ⚡ CHARMING CHIC MAKEUP
@@ -175,7 +160,6 @@ function App() {
         </div>
       </div>
 
-      {/* TAMPILAN USER */}
       {view === 'user' && (
         <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl shadow-blue-900/5 p-8 border border-white relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
@@ -236,13 +220,12 @@ function App() {
 
             <button type="submit" disabled={isLoading} 
               className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-3.5 px-4 rounded-xl hover:from-blue-700 hover:to-indigo-700 shadow-xl shadow-blue-500/30 hover:shadow-blue-600/40 transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all mt-6 disabled:opacity-70 disabled:cursor-not-allowed">
-              {isLoading ? '⏳ Memproses Token...' : 'Booking Sekarang ✏️'}
+              {isLoading ? '⏳ Memproses Reservasi...' : 'Konfirmasi Reservasi ✓'}
             </button>
           </form>
         </div>
       )}
 
-      {/* TAMPILAN ADMIN */}
       {view === 'admin' && (
         <div className="w-full max-w-5xl">
           
@@ -328,7 +311,7 @@ function App() {
                           <td className="p-5 text-center">
                             <div className="flex justify-center gap-2">
                               {b.status === 'pending' && (
-                                <button onClick={() => handleUpdateStatus(b.id, 'confirmed')} className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold py-2 px-3.5 rounded-lg shadow-md hover:shadow-emerald-500/30 transition-all active:scale-95">Set Lunas</button>
+                                <button onClick={() => handleUpdateStatus(b.id, 'confirmed')} className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold py-2 px-3.5 rounded-lg shadow-md hover:shadow-emerald-500/30 transition-all active:scale-95">Konfirmasi</button>
                               )}
                               {b.status !== 'cancelled' && (
                                 <button onClick={() => handleUpdateStatus(b.id, 'cancelled')} className="bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold py-2 px-3.5 rounded-lg shadow-md hover:shadow-rose-500/30 transition-all active:scale-95">Batal</button>
